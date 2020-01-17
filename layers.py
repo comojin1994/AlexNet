@@ -1,9 +1,10 @@
 from tensorflow.keras import layers
+import tensorflow as tf
 
 class Layers:
     @staticmethod
     def Input(shape):
-        input = layers.Input(shape)
+        input = layers.Input(shape, dtype=tf.float32)
         return input
 
     @staticmethod
