@@ -3,6 +3,7 @@ import Hyperparam as hp
 from layers import Layers
 
 input_shape = (32, 32, 3)
+# input_shape = images[0].shape
 
 inputs = Layers.Input(shape = input_shape)
 
@@ -23,6 +24,7 @@ net = Layers.Dense(2048, 'relu')(net)
 net = Layers.Dense(10, 'softmax')(net)
 
 model = tf.keras.Model(inputs=inputs, outputs=net, name='AlexNet')
+
 
 loss_object = tf.keras.losses.SparseCategoricalCrossentropy()
 optimizer = tf.keras.optimizers.Adam(learning_rate=hp.learning_rate)

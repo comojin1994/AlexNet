@@ -17,8 +17,8 @@ train_ds = train_ds.batch(hp.batch_size)
 test_ds = tf.data.Dataset.from_tensor_slices((x_test, y_test))
 test_ds = test_ds.batch(hp.batch_size)
 
+print('Start Training')
 for epoch in range(hp.epoch):
-    print('Start Training')
     for images, labels in train_ds:
         m.train_step(images, labels)
 
@@ -32,4 +32,4 @@ for epoch in range(hp.epoch):
                           m.test_accuracy.result() * 100))
 print('End Training')
 
-m.model.evaluate(x_test, y_test, batch_size=hp.batch_size)
+# m.model.evaluate(x_test, y_test, batch_size=hp.batch_size)
