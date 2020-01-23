@@ -1,16 +1,35 @@
 import tensorflow as tf
-import tensorflow_datasets as tfds
-from utils import onehot_encoding, read_image_label, image_preprocessing
+import os
+import args
+import callback as call
 
-train_ds = tfds.load(name='cifar10', split='train', shuffle_files=True)
-test_ds = tfds.load(name='cifar10', split='test', shuffle_files=True)
+from glob import glob
+from datetime import datetime
 
-train_image = [feature['image'] for feature in train_ds]
-train_label = [feature['label'] for feature in train_ds]
+from utils import *
+from layers import *
+from model import *
 
-test_image = [feature['image'] for feature in test_ds]
-test_label = [feature['label'] for feature in test_ds]
 
-classes = tf.unique(train_label).y.numpy()
+# Model
+model = model()
 
-train_ds = tf.data.Dataset.map(read_image_label)
+# training
+print('Start training')
+starttime = datetime.now()
+
+history = model.fit_generator(
+    generator=args.train_dataset,
+    steps_per_epoch=args.train_step,
+    epochs=args.num_epoch,
+    validation_data=args.test_dataset,
+    validation_steps=args.test_step,
+    callbacks=[call.tensorboard, call.learning_rate_scheduler, call.checkpoint]
+
+)
+
+endtime = datetime.now()
+
+print(history.params)
+print('End training')
+print((endtime-starttime))
