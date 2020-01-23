@@ -209,4 +209,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# logs,ckpt,data
+ver2/logs/
+ver2/checkpoints/
+ver2/dataset/
 # End of https://www.gitignore.io/api/python,pycharm,jupyternotebooks
