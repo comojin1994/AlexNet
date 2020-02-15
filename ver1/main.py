@@ -3,6 +3,9 @@ from tensorflow.keras import datasets
 import Hyperparam as hp
 import model as m
 
+gpus= tf.config.experimental.list_physical_devices('GPU')
+tf.config.experimental.set_memory_growth(gpus[0], True)
+
 cifar10 = datasets.cifar10
 
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()
