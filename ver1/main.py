@@ -3,8 +3,12 @@ from tensorflow.keras import datasets
 import Hyperparam as hp
 import model as m
 
-gpus= tf.config.experimental.list_physical_devices('GPU')
-tf.config.experimental.set_memory_growth(gpus[0], True)
+gpus = tf.config.experimental.list_physical_devices('GPU')
+if gpus:
+  try:
+    tf.config.experimental.set_memory_growth(gpus[0], True)
+  except RuntimeError as e:
+    print(e)
 
 cifar10 = datasets.cifar10
 
